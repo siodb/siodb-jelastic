@@ -2,12 +2,14 @@
 type: install
 id: siodb
 name: Siodb
+version: 0.6.0
 category: apps/dev-tools
 homepage: https://siodb.io
 baseUrl: https://raw.githubusercontent.com/siodb/siodb-jelastic/master
 logo: /images/siodb-70x70.png
 description: |
-   [Siodb documentation](https://docs.siodb.com/).
+   A relational SQL database that secures your data, manages personal data life-cycle, and automates operational tasks.
+   [Siodb documentation](https://docs.siodb.io/)
 
 
 nodes:
