@@ -4,6 +4,7 @@ id: siodb
 name: Siodb
 category: apps/dev-tools
 homepage: https://siodb.io
+baseUrl: https://raw.githubusercontent.com/siodb/siodb-jelastic/master
 logo: /images/siodb-70x70.png
 description: |
    [Siodb documentation](https://docs.siodb.com/).
@@ -13,6 +14,7 @@ nodes:
   - nodeType: siodb
     count: 1
     cloudlets: 8
+    nodeGroup: nosqldb
     scalingMode: STATELESS
     skipNodeEmails: true
     password: ${fn.password}
@@ -21,6 +23,6 @@ nodes:
 success:
   email: false
   text: |
-    **Admin Panel**: [${nodes.sqldb.url}](${nodes.sqldb.url})
+    **Admin Panel**: [${nodes.nosqldb.url}](${nodes.nosqldb.url})
     **User**: admin
     **Password**: has been sent to your email box
