@@ -1,0 +1,26 @@
+---
+type: install
+id: siodb
+name: Siodb
+category: apps/dev-tools
+homepage: https://siodb.io
+logo: /images/siodb-70x70.png
+description: |
+   [Siodb documentation](https://docs.siodb.com/).
+
+
+nodes:
+  - nodeType: siodb
+    count: 1
+    cloudlets: 8
+    scalingMode: STATELESS
+    skipNodeEmails: true
+    password: ${fn.password}
+    cluster: true
+
+success:
+  email: false
+  text: |
+    **Admin Panel**: [${nodes.sqldb.url}](${nodes.sqldb.url})
+    **User**: admin
+    **Password**: has been sent to your email box
