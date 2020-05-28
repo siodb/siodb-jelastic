@@ -2,7 +2,6 @@
 type: install
 id: siodb
 name: Siodb
-version: 0.6.0
 category: apps/dev-tools
 homepage: https://siodb.io
 baseUrl: https://raw.githubusercontent.com/siodb/siodb-jelastic/master
