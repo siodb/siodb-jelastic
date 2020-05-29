@@ -11,7 +11,7 @@ description: |
    [Siodb documentation](https://docs.siodb.io/)
 
 nodes:
-  - cloudlets: 16
+  - cloudlets: 8
     nodeGroup: sqldb
     image: siodb/siodb
 
