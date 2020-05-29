@@ -22,5 +22,5 @@ onInstall:
 success:
   email: true
   text: |
-    **Admin Panel**: [${nodes.sqldb.url}](${nodes.sqldb.url})
+    **Admin Panel**: ${nodes.sqldb.private_ip}
     **Admin user private key**: has been sent to your email box
