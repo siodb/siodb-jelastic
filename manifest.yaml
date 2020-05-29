@@ -16,11 +16,11 @@ nodes:
     image: siodb/siodb
 
 onInstall:
-  script: |
-    cat /home/siodb/.ssh/id_rsa
+  cmd [sqldb]: cat /home/siodb/.ssh/id_rsa
 
 success:
   email: true
   text: |
-    **Admin Panel**: ${nodes.sqldb.private_ip}
-    **Admin user private key**: has been sent to your email box
+    **Admin Panel**: ${nodes.sqldb[0].address}
+    **URI**: siodb://root@${nodes.sqldb[0].endpoints.domain}:${nodes.sqldb[0].endpoints.publicPort}?identity_file=<PATH_TO_SIODB_ROOT_USER_PRIVATE_KEY>
+    **PATH_TO_SIODB_ROOT_USER_PRIVATE_KEY**: ${nodes.sqldb[0].cmd}
