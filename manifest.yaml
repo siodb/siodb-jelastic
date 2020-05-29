@@ -13,7 +13,7 @@ description: |
 nodes:
   - cloudlets: 16
     nodeGroup: sqldb
-    image: siodb
+    image: siodb/siodb
 
 onInstall:
   script: |
