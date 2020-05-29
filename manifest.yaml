@@ -10,20 +10,17 @@ description: |
    A relational SQL database that secures your data, manages personal data life-cycle, and automates operational tasks.
    [Siodb documentation](https://docs.siodb.io/)
 
-
 nodes:
-  - nodeType: siodb
-    count: 1
-    cloudlets: 8
-    nodeGroup: nosqldb
-    scalingMode: STATELESS
-    skipNodeEmails: true
-    password: ${fn.password}
-    cluster: true
+  - cloudlets: 16
+    nodeGroup: sqldb
+    image: siodb
+
+onInstall:
+  script: |
+    cat /home/siodb/.ssh/id_rsa
 
 success:
-  email: false
+  email: true
   text: |
-    **Admin Panel**: [${nodes.nosqldb.url}](${nodes.nosqldb.url})
-    **User**: admin
-    **Password**: has been sent to your email box
+    **Admin Panel**: [${nodes.sqldb.url}](${nodes.sqldb.url})
+    **Admin user private key**: has been sent to your email box
