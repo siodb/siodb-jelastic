@@ -21,6 +21,6 @@ onInstall:
 success:
   email: true
   text: |
-    **Admin Panel**: ${nodes.sqldb.first.address}
-    **URI**: siodb://root@${nodes.sqldb.first.endpoints.domain}:${nodes.sqldb.first.endpoints.publicPort}?identity_file=<ROOT_PRIVATE_KEY>
-    **ROOT_PRIVATE_KEY**: ${nodes.sqldb.first.cmd}
+    **Admin Panel**: ${nodes.sqldb.address}
+    **URI**: siodb://root@${nodes.sqldb.endpoints.domain}:${nodes.sqldb.endpoints.publicPort}?identity_file=<ROOT_PRIVATE_KEY>
+    **ROOT_PRIVATE_KEY**: ${nodes.sqldb.cmd}
