@@ -21,6 +21,17 @@ onInstall:
 success:
   email: true
   text: |
-    **URI**: siodb://root@${nodes.sqldb.address}:50000?identity_file=<ROOT_PRIVATE_KEY_FILE>
-    **Client**: siocli --host ${nodes.sqldb.address} --user root --identity_file <ROOT_PRIVATE_KEY_FILE>
-    **ROOT_PRIVATE_KEY**: ${nodes.sqldb.cmd}
+    ## URI
+
+    siodb://root@${nodes.sqldb.address}:50000?identity_file=<ROOT_PKEY_FILE>
+
+    ## Client (siocli)
+
+    ```bash
+    siocli --host ${nodes.sqldb.address} \
+    --user root --identity_file <ROOT_PKEY_FILE>
+    ```
+
+    ## ROOT_PKEY_FILE
+
+    `/home/siodb/.ssh/id_rsa`
