@@ -25,6 +25,7 @@ success:
     ## Client (siocli)
 
     ```bash
+    sudo su - siodb
     siocli --host ${nodes.sqldb.address} \
     --user root --identity_file <ROOT_PKEY_FILE>
     ```
