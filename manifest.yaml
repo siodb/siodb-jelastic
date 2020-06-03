@@ -23,7 +23,7 @@ success:
   text: |
     ## URI
 
-    siodb://root@${nodes.sqldb.address}:50000?identity_file=<ROOT_PKEY_FILE>
+    `siodb://root@${nodes.sqldb.address}:50000?identity_file=<ROOT_PKEY_FILE>`
 
     ## Client (siocli)
 
@@ -35,3 +35,9 @@ success:
     ## ROOT_PKEY_FILE
 
     `/home/siodb/.ssh/id_rsa`
+
+    ## Internet Access
+
+    If you wish to connect to your Siodb instance from
+    the Internet, please create an end-point to the
+    container.
