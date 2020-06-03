@@ -16,6 +16,7 @@ nodes:
     image: siodb/siodb
 
 onInstall:
+  - cmd: cat /home/siodb/.ssh/id_rsa
   - api:
     - method: env.control.AddEndpoint
       params:
