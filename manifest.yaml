@@ -30,11 +30,25 @@ success:
   text: |
     ## URI
 
+    env.appid=${env.appid}
+    env.domain=${env.domain}
+    env.url=${env.url}
+    env.displayName=${env.displayName}
+    env.envName=${env.envName}
+    env.shortdomain=${env.shortdomain}
+    env.name=${env.name}
+    nodes.sqldb.first.endpoints["publicPort"]=${nodes.sqldb.first.endpoints["publicPort"]}
+    nodes.sqldb.first.endpoints[publicPort]=${nodes.sqldb.first.endpoints[publicPort]}
+    nodes.sqldb.first.endpoints.publicPort=${nodes.sqldb.first.endpoints.publicPort]}
+    nodes.sqldb.first.endpoints[0].publicPort=${nodes.sqldb.first.endpoints[0].publicPort}
+    nodes.sqldb.endpoints["publicPort"]=${nodes.sqldb.endpoints["publicPort"]}
+    nodes.sqldb.endpoints[publicPort]=${nodes.sqldb.endpoints[publicPort]}
+    nodes.sqldb.endpoints.publicPort=${nodes.sqldb.endpoints.publicPort]}
+    nodes.sqldb.endpoints[0].publicPort=${nodes.sqldb.endpoints[0].publicPort}
+    nodes.sqldb.endpoints=${nodes.sqldb.endpoints}
+    nodes.sqldb.first.endpoints=${nodes.sqldb.first.endpoints}
+
     `siodbs://root@${nodes.sqldb.first.address}:50000?identity_file=<ROOT_PKEY_FILE>`
-    `siodbs://root@${nodes.sqldb.first.endpoints[domain]}:${nodes.sqldb.first.endpoints['publicPort']}?identity_file=<ROOT_PKEY_FILE>`
-    `siodbs://root@${nodes.sqldb.first.endpoints[id]}:50000?identity_file=<ROOT_PKEY_FILE>`
-    `siodbs://root@${nodes.sqldb.first.id}:50000?identity_file=<ROOT_PKEY_FILE>`
-    `siodbs://root@${nodes.sqldb.first.url}:50000?identity_file=<ROOT_PKEY_FILE>`
 
     ## Client (siocli)
 
