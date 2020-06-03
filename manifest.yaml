@@ -17,7 +17,7 @@ nodes:
 
 onInstall:
   - api:
-    - method: environment.control.AddEndpoint
+    - method: env.control.AddEndpoint
       params:
         envName: ${env.envName}
         protocol: "TCP"
