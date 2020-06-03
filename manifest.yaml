@@ -15,12 +15,24 @@ nodes:
     nodeGroup: sqldb
     image: siodb/siodb
 
+onInstall:
+  - api:
+    - method: environment.control.AddEndpoint
+      params:
+        envName: ${env.envName}
+        protocol: "TCP"
+        privatePort: 50000
+        nodeId: ${nodes.sqldb.id}
+        name: EndPoint50000
+
 success:
   email: true
   text: |
     ## URI
 
     `siodbs://root@${nodes.sqldb.address}:50000?identity_file=<ROOT_PKEY_FILE>`
+    `siodbs://root@${nodes.sqldb.endpoints.domain}:${nodes.sqldb.endpoints.publicPort}?identity_file=<ROOT_PKEY_FILE>`
+    `siodbs://root@${nodes.sqldb.endpoints.id}:50000?identity_file=<ROOT_PKEY_FILE>`
 
     ## Client (siocli)
 
