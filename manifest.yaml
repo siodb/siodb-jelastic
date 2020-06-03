@@ -31,15 +31,18 @@ success:
     ## URI
 
     `siodbs://root@${nodes.sqldb.first.address}:50000?identity_file=<ROOT_PKEY_FILE>`
-    `siodbs://root@${nodes.sqldb.first.endpoints.domain}:${nodes.sqldb.first.endpoints.publicPort}?identity_file=<ROOT_PKEY_FILE>`
-    `siodbs://root@${nodes.sqldb.first.endpoints.id}:50000?identity_file=<ROOT_PKEY_FILE>`
+    `siodbs://root@${nodes.sqldb.first.endpoints[domain]}:${nodes.sqldb.first.endpoints['publicPort']}?identity_file=<ROOT_PKEY_FILE>`
+    `siodbs://root@${nodes.sqldb.first.endpoints[id]}:50000?identity_file=<ROOT_PKEY_FILE>`
+    `siodbs://root@${nodes.sqldb.first.id}:50000?identity_file=<ROOT_PKEY_FILE>`
+    `siodbs://root@${nodes.sqldb.first.url}:50000?identity_file=<ROOT_PKEY_FILE>`
 
     ## Client (siocli)
 
+    From the container:
+
     ```bash
     sudo su - siodb
-    siocli --host ${nodes.sqldb.address} \
-    --user root --identity_file <ROOT_PKEY_FILE>
+    siocli --user root
     ```
 
     ## ROOT_PKEY_FILE
