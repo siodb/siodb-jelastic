@@ -17,6 +17,8 @@ nodes:
 
 onInstall:
   - cmd[sqldb]: cat /home/siodb/.ssh/id_rsa
+  - setGlobals:
+      PRIVATE_KEY: ${response.out}
   - api:
     - method: env.control.AddEndpoint
       params:
@@ -49,6 +51,10 @@ success:
     ```
 
     ## ROOT_PKEY_FILE
+
+    ```bash
+    ${globals.PRIVATE_KEY}
+    ```
 
     The private key for the Siodb root user can
     be found in the container here: `/home/siodb/.ssh/id_rsa`.
