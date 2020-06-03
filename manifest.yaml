@@ -24,31 +24,15 @@ onInstall:
         privatePort: 50000
         nodeId: ${nodes.sqldb.id}
         name: EndPoint50000
+    - setGlobals:
+        PUBLIC_PORT: ${response.object.publicPort}
 
 success:
   email: true
   text: |
-    ## URI
+    ## URI (from the Internet)
 
-    env.appid=${env.appid}
-    env.domain=${env.domain}
-    env.url=${env.url}
-    env.displayName=${env.displayName}
-    env.envName=${env.envName}
-    env.shortdomain=${env.shortdomain}
-    env.name=${env.name}
-    nodes.sqldb.first.endpoints["publicPort"]=${nodes.sqldb.first.endpoints["publicPort"]}
-    nodes.sqldb.first.endpoints[publicPort]=${nodes.sqldb.first.endpoints[publicPort]}
-    nodes.sqldb.first.endpoints.publicPort=${nodes.sqldb.first.endpoints.publicPort]}
-    nodes.sqldb.first.endpoints[0].publicPort=${nodes.sqldb.first.endpoints[0].publicPort}
-    nodes.sqldb.endpoints["publicPort"]=${nodes.sqldb.endpoints["publicPort"]}
-    nodes.sqldb.endpoints[publicPort]=${nodes.sqldb.endpoints[publicPort]}
-    nodes.sqldb.endpoints.publicPort=${nodes.sqldb.endpoints.publicPort]}
-    nodes.sqldb.endpoints[0].publicPort=${nodes.sqldb.endpoints[0].publicPort}
-    nodes.sqldb.endpoints=${nodes.sqldb.endpoints}
-    nodes.sqldb.first.endpoints=${nodes.sqldb.first.endpoints}
-
-    `siodbs://root@${nodes.sqldb.first.address}:50000?identity_file=<ROOT_PKEY_FILE>`
+    `siodbs://root@node${nodes.sqldb.first.id}-${env.domain}:${globals.PUBLIC_PORT}?identity_file=<ROOT_PKEY_FILE>`
 
     ## Client (siocli)
 
@@ -66,8 +50,3 @@ success:
     It is also displayed at the beginning of the
     container log.
 
-    ## Internet Access
-
-    If you wish to connect to your Siodb instance from
-    the Internet, please create an end-point to the
-    container.
