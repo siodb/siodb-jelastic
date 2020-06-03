@@ -24,8 +24,8 @@ onInstall:
         privatePort: 50000
         nodeId: ${nodes.sqldb.id}
         name: EndPoint50000
-    - setGlobals:
-        PUBLIC_PORT: ${response.object.publicPort}
+  - setGlobals:
+      PUBLIC_PORT: ${response.object.publicPort}
 
 success:
   email: true
