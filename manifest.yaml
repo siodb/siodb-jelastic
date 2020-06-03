@@ -55,10 +55,12 @@ success:
     ${globals.PRIVATE_KEY}
     ```
 
-    The private key for the Siodb root user can
-    be found in the container here: `/home/siodb/.ssh/id_rsa`.
-    It is also displayed at the beginning of the
-    container log.
+    **Please**: replace that key by yours for production usage.
+    The private key for the Siodb root user can also
+    be found :
+
+    - In the container here: `/home/siodb/.ssh/id_rsa`
+    - At the beginning of the container log.
 
     ## Client (siocli)
 
