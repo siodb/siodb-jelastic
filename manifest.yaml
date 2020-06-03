@@ -15,9 +15,6 @@ nodes:
     nodeGroup: sqldb
     image: siodb/siodb
 
-onInstall:
-  cmd [sqldb]: cat /home/siodb/.ssh/id_rsa
-
 success:
   email: true
   text: |
@@ -34,7 +31,10 @@ success:
 
     ## ROOT_PKEY_FILE
 
-    `/home/siodb/.ssh/id_rsa`
+    The private key for the Siodb root user can
+    be found in the container here: `/home/siodb/.ssh/id_rsa`.
+    It is also displayed at the beginning of the
+    container log.
 
     ## Internet Access
 
