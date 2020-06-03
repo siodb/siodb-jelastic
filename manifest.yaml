@@ -30,9 +30,9 @@ success:
   text: |
     ## URI
 
-    `siodbs://root@${nodes.sqldb.address}:50000?identity_file=<ROOT_PKEY_FILE>`
-    `siodbs://root@${nodes.sqldb.endpoints.domain}:${nodes.sqldb.endpoints.publicPort}?identity_file=<ROOT_PKEY_FILE>`
-    `siodbs://root@${nodes.sqldb.endpoints.id}:50000?identity_file=<ROOT_PKEY_FILE>`
+    `siodbs://root@${nodes.sqldb.first.address}:50000?identity_file=<ROOT_PKEY_FILE>`
+    `siodbs://root@${nodes.sqldb.first.endpoints.domain}:${nodes.sqldb.first.endpoints.publicPort}?identity_file=<ROOT_PKEY_FILE>`
+    `siodbs://root@${nodes.sqldb.first.endpoints.id}:50000?identity_file=<ROOT_PKEY_FILE>`
 
     ## Client (siocli)
 
