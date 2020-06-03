@@ -33,22 +33,21 @@ onInstall:
 success:
   email: true
   text: |
-    ## URI (from the Internet)
+    ## URI
+
+    ### From the Internet
 
     `siodbs://root@node${nodes.sqldb.first.id}-${env.domain}:${globals.PUBLIC_PORT}?identity_file=<ROOT_PKEY_FILE>`
 
-    ## URI (from the cloud)
+    `ROOT_PKEY_FILE`: You must create a private key file and write the private key
+    displayed below. That is used for the authentication to the instance Siodb as `root`.
 
-    `siodbs://root@node${nodes.sqldb.intIP}:50000?identity_file=<ROOT_PKEY_FILE>`
+    ### From the cloud
 
-    ## Client (siocli)
+    `siodbs://root@${nodes.sqldb.intIP}:50000?identity_file=<ROOT_PKEY_FILE>`
 
-    From the container:
-
-    ```bash
-    sudo su - siodb
-    siocli --user root
-    ```
+    `ROOT_PKEY_FILE`: You must create a private key file and write the private key
+    displayed below. That is used for the authentication to the instance Siodb as `root`.
 
     ## ROOT_PKEY_FILE
 
@@ -60,4 +59,14 @@ success:
     be found in the container here: `/home/siodb/.ssh/id_rsa`.
     It is also displayed at the beginning of the
     container log.
+
+    ## Client (siocli)
+
+    From the container:
+
+    ```bash
+    sudo su - siodb
+    siocli --user root
+    ```
+
 
