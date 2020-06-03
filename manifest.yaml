@@ -16,7 +16,7 @@ nodes:
     image: siodb/siodb
 
 onInstall:
-  - cmd: cat /home/siodb/.ssh/id_rsa
+  - cmd[sqldb]: cat /home/siodb/.ssh/id_rsa
   - api:
     - method: env.control.AddEndpoint
       params:
@@ -34,6 +34,10 @@ success:
     ## URI (from the Internet)
 
     `siodbs://root@node${nodes.sqldb.first.id}-${env.domain}:${globals.PUBLIC_PORT}?identity_file=<ROOT_PKEY_FILE>`
+
+    ## URI (from the cloud)
+
+    `siodbs://root@node${nodes.sqldb.intIP}:50000?identity_file=<ROOT_PKEY_FILE>`
 
     ## Client (siocli)
 
