@@ -27,6 +27,13 @@ onInstall:
         privatePort: 50000
         nodeId: ${nodes.sqldb.id}
         name: EndPoint50000
+    - method: env.control.AddEndpoint
+      params:
+        envName: ${env.envName}
+        protocol: "TCP"
+        privatePort: 50443
+        nodeId: ${nodes.sqldb.id}
+        name: EndPoint50443
   - setGlobals:
       PUBLIC_PORT: ${response.object.publicPort}
 
