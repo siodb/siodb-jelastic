@@ -7,7 +7,7 @@ homepage: https://siodb.io
 baseUrl: https://raw.githubusercontent.com/siodb/siodb-jelastic/master
 logo: /images/siodb-70x70.png
 description: |
-   A relational SQL database that secures your data, manages personal data life-cycle, and automates operational tasks.
+   Deliver safer and faster with Siodb, a Swiss-knife database that removes database complexity with automation, REST+SQL and full encryption. 
    [Siodb documentation](https://docs.siodb.io/)
 
 nodes:
