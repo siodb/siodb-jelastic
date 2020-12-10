@@ -19,9 +19,6 @@ onInstall:
   - cmd[sqldb]: cat /home/siodb/.ssh/id_rsa
   - setGlobals:
       PRIVATE_KEY: ${response.out}
-  - cmd[sqldb]: siocli -u root <<< 'alter user root add token autojelastic' | grep '^Server: token:' | awk -F ':' '{print $3}' | awk '{print $1}'
-  - setGlobals:
-      ROOT_TOKEN: ${response.out}
   - api:
     - method: env.control.AddEndpoint
       params:
