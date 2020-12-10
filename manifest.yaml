@@ -16,9 +16,32 @@ nodes:
     image: siodb/siodb
 
 onInstall:
+
+  - cmd[sqldb]: cat /home/siodb/.ssh/id_rsa.pub >> /home/siodb/.ssh/authorized_keys
+      
   - cmd[sqldb]: cat /home/siodb/.ssh/id_rsa
   - setGlobals:
       PRIVATE_KEY: ${response.out}
+
+  - cmd[sqldb]: echo $(openssl rand -hex 64)
+  - setGlobals:
+      ROOT_TOKEN: ${response.out}
+
+  # Sleep until Siodb is ready for new connection
+  - cmd[sqldb]: sleep 30      
+  - cmd[sqldb]: sudo su - siodb -c 'siocli -u root <<< "alter user root add token autojelastic x'"'"'${globals.ROOT_TOKEN}'"'"'"'
+
+  - api:
+    - method: env.control.AddEndpoint
+      params:
+        envName: ${env.envName}
+        protocol: "TCP"
+        privatePort: 22
+        nodeId: ${nodes.sqldb.id}
+        name: EndPoint22
+  - setGlobals:
+      SSH_PUBLIC_PORT: ${response.object.publicPort}
+      
   - api:
     - method: env.control.AddEndpoint
       params:
@@ -29,6 +52,7 @@ onInstall:
         name: EndPoint50000
   - setGlobals:
       SQL_PUBLIC_PORT: ${response.object.publicPort}
+      
   - api:
     - method: env.control.AddEndpoint
       params:
@@ -43,24 +67,15 @@ onInstall:
 success:
   email: true
   text: |
-    ## URI
+    ## Notice
 
-    ### REST: From the Internet
+    ### REST
 
-    `curl -k https://root:<ROOT_TOKEN>@node${nodes.sqldb.first.id}-${env.domain}:${REST_PUBLIC_PORT}/databases/sys/tables/sys_dummy/rows`
+    `curl -k https://root:${globals.ROOT_TOKEN}@node${nodes.sqldb.first.id}-${env.domain}:${globals.REST_PUBLIC_PORT}/databases/sys/tables/sys_dummy/rows`
     
-    `ROOT_TOKEN`: ${globals.ROOT_TOKEN}
+    ### SQL
 
-    ### SQL: From the Internet
-
-    `siodbs://root@node${nodes.sqldb.first.id}-${env.domain}:${globals.SQL_PUBLIC_PORT}?identity_file=<ROOT_PKEY_FILE>`
-
-    `ROOT_PKEY_FILE`: You must create a private key file and write the private key
-    displayed below. That is used for the authentication to the instance Siodb as `root`.
-
-    ### From the Jelastic cloud
-
-    `siodbs://root@${nodes.sqldb.intIP}:50000?identity_file=<ROOT_PKEY_FILE>`
+    `ssh -p ${globals.SSH_PUBLIC_PORT} -i <ROOT_PKEY_FILE> siodb@node${nodes.sqldb.first.id}-${env.domain} -t 'siocli -u root'`
 
     `ROOT_PKEY_FILE`: You must create a private key file and write the private key
     displayed below. That is used for the authentication to the instance Siodb as `root`.
@@ -70,21 +85,18 @@ success:
     ```bash
     ${globals.PRIVATE_KEY}
     ```
+    
+    ### URI
+    
+    #### From the Internet: 
+    
+    `siodbs://root@node${nodes.sqldb.first.id}-${env.domain}:${globals.SQL_PUBLIC_PORT}?identity_file=<ROOT_PKEY_FILE>`
 
-    **Please**: replace that key by yours for production usage.
-    The private key for the Siodb root user can also
-    be found :
-
-    - In the container here: `/home/siodb/.ssh/id_rsa`
-    - At the beginning of the container log.
-
-    ## Client (siocli)
-
-    From the container:
-
-    ```bash
-    sudo su - siodb
-    siocli --user root
-    ```
-
-
+    #### From the Jelastic cloud: 
+    
+    `siodbs://root@${nodes.sqldb.intIP}:50000?identity_file=<ROOT_PKEY_FILE>`
+    
+    ## Documentation
+    
+    More details on <a href="http://docs.siodb.io/" target="_blank"> the documentation</a>.
+    
