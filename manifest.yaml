@@ -19,6 +19,9 @@ onInstall:
   - cmd[sqldb]: cat /home/siodb/.ssh/id_rsa
   - setGlobals:
       PRIVATE_KEY: ${response.out}
+  - cmd[sqldb]: siocli -u root <<< 'alter user root add token autojelastic' | grep '^Server: token:' | awk -F ':' '{print $3}' | awk '{print $1}'
+  - setGlobals:
+      ROOT_TOKEN: ${response.out}
   - api:
     - method: env.control.AddEndpoint
       params:
@@ -27,6 +30,9 @@ onInstall:
         privatePort: 50000
         nodeId: ${nodes.sqldb.id}
         name: EndPoint50000
+  - setGlobals:
+      SQL_PUBLIC_PORT: ${response.object.publicPort}
+  - api:
     - method: env.control.AddEndpoint
       params:
         envName: ${env.envName}
@@ -35,21 +41,27 @@ onInstall:
         nodeId: ${nodes.sqldb.id}
         name: EndPoint50443
   - setGlobals:
-      PUBLIC_PORT: ${response.object.publicPort}
+      REST_PUBLIC_PORT: ${response.object.publicPort}
 
 success:
   email: true
   text: |
     ## URI
 
-    ### From the Internet
+    ### REST: From the Internet
 
-    `siodbs://root@node${nodes.sqldb.first.id}-${env.domain}:${globals.PUBLIC_PORT}?identity_file=<ROOT_PKEY_FILE>`
+    `curl -k https://root:<ROOT_TOKEN>@node${nodes.sqldb.first.id}-${env.domain}:${REST_PUBLIC_PORT}/databases/sys/tables/sys_dummy/rows`
+    
+    `ROOT_TOKEN`: ${globals.ROOT_TOKEN}
+
+    ### SQL: From the Internet
+
+    `siodbs://root@node${nodes.sqldb.first.id}-${env.domain}:${globals.SQL_PUBLIC_PORT}?identity_file=<ROOT_PKEY_FILE>`
 
     `ROOT_PKEY_FILE`: You must create a private key file and write the private key
     displayed below. That is used for the authentication to the instance Siodb as `root`.
 
-    ### From the cloud
+    ### From the Jelastic cloud
 
     `siodbs://root@${nodes.sqldb.intIP}:50000?identity_file=<ROOT_PKEY_FILE>`
 
